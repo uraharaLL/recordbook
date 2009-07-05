@@ -1,0 +1,7 @@
+#labels Phase-Requirements
+=Системные требования=
+ * Веб-сервер
+ * mod_wsgi для веб-сервера
+ * Python 2.5
+ * MySql
+ * Pytils
