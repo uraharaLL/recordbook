@@ -3,5 +3,6 @@
  * Веб-сервер
  * mod_wsgi для веб-сервера
  * Python 2.5
+ * Django
  * MySql
  * Pytils
