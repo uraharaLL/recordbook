@@ -1,0 +1,8 @@
+#summary Описание процесса установки
+#labels Phase-Deploy
+
+= Установка системы электронных дневников =
+
+  # Устанавливаем необходимые пакеты
+  # Переименовываем файл src/settings_simple.py в src/settings.py и при необходимости переопределяем пременные DATABASE_ENGINE, DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD и другие
+  # Настраиваем веб-сервер
