@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+	<title>Авторизируйтесь</title>
+	<style>
+		#content{
+			position: absolute;
+			top: 200px;
+			left: 35%;
+			text-align: center;
+		}
+		input{
+			width: 300px;
+			height: 30px;
+			text-align: center;
+			font-size: 24px;
+		}
+	</style>
+</head>
+<body>
+<center>
+	{{ form.errors }}
+</center>
+<div id="content">
+	<form action="?next=/" method="post">{% csrf_token %}
+		Логин:<br />
+		{{ form.username }}<br /><br />
+		Пароль:<br />
+		{{ form.password }}<br /><br />
+		<input type="submit" style="font-size: 14px;" name="OK" value="Войти">
+	</form>
+</div>
+<script type="text/javascript">
+	document.getElementById('id_username').focus();
+</script>
+</body>
+</html>

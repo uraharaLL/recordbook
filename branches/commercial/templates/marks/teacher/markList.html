@@ -1,0 +1,21 @@
+{% extends 'marks/teacher/page.html' %}
+
+{% block content %}
+<form method="post" action="give/">{% csrf_token %}
+	<table>
+		<tr><td colspan="3">
+			<input type="submit" value="Выставить отметки" />
+		</td></tr>
+		{% for pupil in pupils %}
+		<tr>
+			<td><input type="checkbox" name="pupil-{{ pupil.id }}" id="pupil-{{ pupil.id }}" /></td>
+			<td><label for="pupil-{{ pupil.id }}">{{ pupil.name }}</label></td>
+			<td>{% if pupil.absent %}H{% else %}{{ pupil.mark|default:"" }}{% endif %}</td>
+		</tr>
+		{% endfor %}
+		<tr><td colspan="3">
+			<input type="submit" value="Выставить отметки" />
+		</td></tr>
+	</table>
+</form>
+{% endblock %}

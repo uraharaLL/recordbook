@@ -1,0 +1,44 @@
+# -*- coding: UTF-8 -*-
+
+from django.contrib.auth import get_user
+from django.http import HttpResponse
+from django.shortcuts import render_to_response
+
+from models import Pupil, Teacher
+
+class LazyUser(object):
+    def __get__(self, request, obj_type=None):
+        if not hasattr(request, '_cached_user'):
+            user = get_user(request);
+            userprofile = user
+            if user.is_authenticated():
+                try:
+                    if Pupil.objects.filter(user_ptr=user).count()>0: 
+                        userprofile = Pupil.objects.get(user_ptr=user)
+                        userprofile.prefix = 'p'
+                    elif Teacher.objects.filter(user_ptr=user).count()>0: 
+                        userprofile = Teacher.objects.get(user_ptr=user)
+                        userprofile.prefix = 't'
+                    elif user.is_superuser: 
+                        userprofile = user
+                        userprofile.prefix = 'a'
+                except:
+                    userprofile = user
+            else:
+                userprofile = user
+            request._cached_user = userprofile
+        return request._cached_user
+
+class AuthenticationMiddleware(object):
+    def process_request(self, request):
+        request.__class__.user = LazyUser()
+        if request.user.is_authenticated():
+            if request.user.prefix == 't':
+                request.__class__.user_type = 'teacher'
+                request.__class__.is_teacher = True
+                request.__class__.is_pupil = False
+            else:
+                request.__class__.user_type = 'pupil'
+                request.__class__.is_teacher = False
+                request.__class__.is_pupil = True
+        return None
