@@ -3,7 +3,7 @@
  * Веб-сервер
  * mod_wsgi для веб-сервера
  * Python 2.5
- * Django
+ * Django >= 1.2
  * MySql
  * Pytils
  * demjson
